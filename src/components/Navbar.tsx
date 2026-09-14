@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -17,9 +18,14 @@ export function Navbar() {
     <header className="sticky top-0 z-50 border-b border-white/5 bg-base-950/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-accent-500 text-sm font-bold text-white">
-            SF
-          </span>
+          <Image
+            src="/logo.png"
+            alt="SellerFit"
+            width={32}
+            height={32}
+            className="rounded-lg"
+            priority
+          />
           <span className="text-lg font-semibold tracking-tight text-white">
             SellerFit
           </span>

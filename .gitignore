@@ -4,3 +4,6 @@ out/
 .env
 .env.local
 *.log
+
+# arquivo fonte original do logo (pesado, ja usamos as versoes otimizadas em public/ e src/app/icon.png)
+logoseller.png
