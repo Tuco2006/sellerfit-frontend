@@ -5,6 +5,8 @@ import { analisarReuniao } from "@/lib/api";
 import { ResultadoAnalise } from "@/lib/types";
 import { UrgenciaBadge } from "@/components/UrgenciaBadge";
 import { MatchCard } from "@/components/MatchCard";
+import { SinalNegocioBanner } from "@/components/SinalNegocioBanner";
+import { MencoesTags } from "@/components/MencoesTags";
 
 const segmentos = [
   "varejo",
@@ -21,12 +23,13 @@ const segmentos = [
 const exemploTranscricao = `Vendedor: entao, me conta um pouco do que esta acontecendo ai no dia a dia.
 Cliente: olha, hoje o nosso sistema esta bem lento, principalmente no fechamento do caixa. Fora que a gente ainda faz o controle de estoque em planilha, o que da bastante retrabalho.
 Vendedor: entendi, e sobre o suporte de voces hoje, como funciona?
-Cliente: o suporte atual demora muito pra responder e as vezes a gente nem entende direito a explicacao. Isso ja fez a gente perder venda em dia de pico.`;
+Cliente: o suporte atual demora muito pra responder e as vezes a gente nem entende direito a explicacao. Ja estamos vendo propostas de outros fornecedores, tipo Linx, por causa disso.`;
 
 export default function AnalisarPage() {
   const [clienteNome, setClienteNome] = useState("");
   const [empresa, setEmpresa] = useState("");
   const [segmento, setSegmento] = useState(segmentos[0]);
+  const [notaNps, setNotaNps] = useState("");
   const [transcricao, setTranscricao] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState("");
@@ -39,7 +42,13 @@ export default function AnalisarPage() {
     setResultado(null);
 
     try {
-      const dados = await analisarReuniao({ clienteNome, empresa, segmento, transcricao });
+      const dados = await analisarReuniao({
+        clienteNome,
+        empresa,
+        segmento,
+        transcricao,
+        notaNps: notaNps === "" ? undefined : Number(notaNps),
+      });
       setResultado(dados);
     } catch (e) {
       setErro(e instanceof Error ? e.message : "erro inesperado ao analisar a reuniao");
@@ -52,6 +61,7 @@ export default function AnalisarPage() {
     setClienteNome("Marcos Andrade");
     setEmpresa("Rede Boa Compra");
     setSegmento("varejo");
+    setNotaNps("4");
     setTranscricao(exemploTranscricao);
   }
 
@@ -61,7 +71,7 @@ export default function AnalisarPage() {
         <h1 className="text-3xl font-bold text-white">Analisar reuniao</h1>
         <p className="mt-2 max-w-2xl text-slate-400">
           Cole a transcricao da conversa entre o vendedor e o cliente. A IA vai identificar dores,
-          calcular a urgencia e sugerir o atendente mais compativel.
+          calcular a urgencia, apontar sinais de churn/upsell e sugerir o atendente mais compativel.
         </p>
       </div>
 
@@ -78,15 +88,31 @@ export default function AnalisarPage() {
             />
           </div>
 
-          <div>
-            <label className="mb-1.5 block text-sm font-medium text-slate-300">Empresa</label>
-            <input
-              required
-              value={empresa}
-              onChange={(e) => setEmpresa(e.target.value)}
-              placeholder="Ex: Rede Boa Compra"
-              className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-brand-500 focus:outline-none"
-            />
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="mb-1.5 block text-sm font-medium text-slate-300">Empresa</label>
+              <input
+                required
+                value={empresa}
+                onChange={(e) => setEmpresa(e.target.value)}
+                placeholder="Ex: Rede Boa Compra"
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-brand-500 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-sm font-medium text-slate-300">
+                NPS <span className="text-slate-500">(opcional)</span>
+              </label>
+              <input
+                type="number"
+                min={0}
+                max={10}
+                value={notaNps}
+                onChange={(e) => setNotaNps(e.target.value)}
+                placeholder="0 a 10"
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-brand-500 focus:outline-none"
+              />
+            </div>
           </div>
 
           <div>
@@ -157,6 +183,8 @@ export default function AnalisarPage() {
 
           {resultado && (
             <>
+              <SinalNegocioBanner analise={resultado.analise} />
+
               <div className="card rounded-2xl p-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <h2 className="text-lg font-semibold text-white">Perfil identificado</h2>
@@ -177,6 +205,16 @@ export default function AnalisarPage() {
                   <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
                     sentimento: {resultado.analise.sentimentoGeral}
                   </span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                    NPS: {resultado.analise.zonaNps}
+                  </span>
+                </div>
+
+                <div className="mt-4">
+                  <MencoesTags
+                    mencoesTotvs={resultado.analise.mencoesTotvs}
+                    mencoesConcorrentes={resultado.analise.mencoesConcorrentes}
+                  />
                 </div>
 
                 <h3 className="mt-6 text-sm font-semibold text-white">Dores e necessidades identificadas</h3>

@@ -14,9 +14,15 @@ const features = [
     icone: "🎯",
   },
   {
+    titulo: "Sinal de Churn e Upsell",
+    descricao:
+      "Cruzando NPS, mencoes a concorrentes e termos da conversa, o sistema aponta risco de cancelamento ou oportunidade de venda, com a mesma regra validada no desafio de Data Science da equipe.",
+    icone: "📈",
+  },
+  {
     titulo: "Match multi-criterio",
     descricao:
-      "Um algoritmo de score cruza o perfil recomendado com a base de atendentes, considerando traco comportamental, segmento de atuacao e nota media.",
+      "Um algoritmo de score cruza o perfil recomendado com a base de atendentes, considerando traco comportamental, segmento de atuacao, foco em retencao/cross-sell e nota media.",
     icone: "🤝",
   },
   {

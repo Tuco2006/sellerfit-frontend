@@ -1,4 +1,7 @@
 export type Urgencia = "BAIXA" | "MEDIA" | "ALTA";
+export type SinalNegocio = "ALERTA_CHURN" | "OPORTUNIDADE_UPSELL" | "NEUTRO";
+export type ZonaNps = "Promotor" | "Passivo" | "Detrator" | "Sem nota";
+export type Foco = "retencao" | "cross-sell";
 
 export interface Atendente {
   id: string;
@@ -8,6 +11,7 @@ export interface Atendente {
   iniciais: string;
   tracos: string[];
   segmentos: string[];
+  foco: Foco[];
   bio: string;
   anosExperiencia: number;
   notaMedia: number;
@@ -23,6 +27,11 @@ export interface AnaliseTranscricao {
   segmentoDetectado: string;
   sentimentoGeral: string;
   origemAnalise: "openai" | "motor-local";
+  sinalNegocio: SinalNegocio;
+  justificativaSinal: string;
+  zonaNps: ZonaNps;
+  mencoesTotvs: string[];
+  mencoesConcorrentes: string[];
 }
 
 export interface MatchAtendente {
@@ -41,4 +50,5 @@ export interface EntradaAnalise {
   empresa: string;
   segmento: string;
   transcricao: string;
+  notaNps?: number;
 }

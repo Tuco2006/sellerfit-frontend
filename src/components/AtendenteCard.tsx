@@ -6,6 +6,11 @@ const disponibilidadeCor: Record<Atendente["disponibilidade"], string> = {
   Ausente: "bg-slate-500",
 };
 
+const focoLabel: Record<Atendente["foco"][number], string> = {
+  retencao: "🛡️ Retencao",
+  "cross-sell": "💰 Cross-sell",
+};
+
 export function AtendenteCard({ atendente }: { atendente: Atendente }) {
   return (
     <div className="card flex flex-col gap-4 rounded-2xl p-6">
@@ -29,6 +34,17 @@ export function AtendenteCard({ atendente }: { atendente: Atendente }) {
       </div>
 
       <p className="text-sm leading-relaxed text-slate-300">{atendente.bio}</p>
+
+      <div className="flex flex-wrap gap-1.5">
+        {atendente.foco.map((f) => (
+          <span
+            key={f}
+            className="rounded-full border border-accent-500/30 bg-accent-500/10 px-2.5 py-1 text-xs font-medium text-accent-400"
+          >
+            {focoLabel[f]}
+          </span>
+        ))}
+      </div>
 
       <div className="flex flex-wrap gap-1.5">
         {atendente.tracos.map((traco) => (
