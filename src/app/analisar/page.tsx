@@ -35,6 +35,7 @@ export default function AnalisarPage() {
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState("");
   const [resultado, setResultado] = useState<ResultadoAnalise | null>(null);
+  const [modo, setModo] = useState<"ia" | "ml">("ia");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -71,8 +72,11 @@ export default function AnalisarPage() {
       <div className="mb-10">
         <h1 className="text-2xl font-bold text-white sm:text-3xl">Analisar reuniao</h1>
         <p className="mt-2 max-w-2xl text-slate-400">
-          Cole a transcricao da conversa entre o vendedor e o cliente. A IA vai identificar dores,
-          calcular a urgencia, apontar sinais de churn/upsell e sugerir o atendente mais compativel.
+          Cole a transcricao da conversa entre o vendedor e o cliente. Depois de analisar, escolha
+          entre ver o resultado da <strong className="text-white">IA generativa</strong> (dores,
+          urgencia, perfil e match) ou do <strong className="text-white">modelo de Machine Learning</strong>{" "}
+          treinado nos dados do desafio de Data Science — duas formas diferentes de chegar no
+          mesmo objetivo.
         </p>
       </div>
 
@@ -184,65 +188,109 @@ export default function AnalisarPage() {
 
           {resultado && (
             <>
-              <SinalNegocioBanner analise={resultado.analise} />
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                  Forma de analise:
+                </span>
+                <div className="flex rounded-full border border-white/10 bg-white/5 p-1">
+                  <button
+                    type="button"
+                    onClick={() => setModo("ia")}
+                    className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-colors ${
+                      modo === "ia" ? "bg-brand-500 text-white" : "text-slate-300 hover:text-white"
+                    }`}
+                  >
+                    🧠 IA Generativa
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setModo("ml")}
+                    disabled={!resultado.classificacaoML}
+                    className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
+                      modo === "ml" ? "bg-brand-500 text-white" : "text-slate-300 hover:text-white"
+                    }`}
+                  >
+                    📊 Machine Learning
+                  </button>
+                </div>
+              </div>
 
-              {resultado.classificacaoML && (
-                <ClassificacaoMLCard classificacao={resultado.classificacaoML} />
+              {modo === "ia" && (
+                <>
+                  <SinalNegocioBanner analise={resultado.analise} />
+
+                  <div className="card rounded-2xl p-6">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <h2 className="text-lg font-semibold text-white">Perfil identificado</h2>
+                      <div className="flex items-center gap-2">
+                        <UrgenciaBadge urgencia={resultado.analise.urgencia} />
+                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400">
+                          {resultado.analise.origemAnalise === "openai" ? "analisado por IA (OpenAI)" : "motor local"}
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="mt-4 text-sm leading-relaxed text-slate-300">{resultado.analise.resumoPerfil}</p>
+
+                    <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-400">
+                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                        segmento: {resultado.analise.segmentoDetectado}
+                      </span>
+                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                        sentimento: {resultado.analise.sentimentoGeral}
+                      </span>
+                      {resultado.analise.zonaNps && (
+                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                          NPS: {resultado.analise.zonaNps}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="mt-4">
+                      <MencoesTags
+                        mencoesTotvs={resultado.analise.mencoesTotvs}
+                        mencoesConcorrentes={resultado.analise.mencoesConcorrentes}
+                      />
+                    </div>
+
+                    <h3 className="mt-6 text-sm font-semibold text-white">Dores e necessidades identificadas</h3>
+                    <ul className="mt-3 space-y-2">
+                      {resultado.analise.dores.map((dor, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
+                          <span className="mt-0.5 text-accent-400">●</span>
+                          {dor}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="mb-4 text-lg font-semibold text-white">Atendentes recomendados</h2>
+                    <div className="space-y-4">
+                      {resultado.matches.map((match, i) => (
+                        <MatchCard key={match.atendente.id} match={match} posicao={i + 1} />
+                      ))}
+                    </div>
+                  </div>
+                </>
               )}
 
-              <div className="card rounded-2xl p-6">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <h2 className="text-lg font-semibold text-white">Perfil identificado</h2>
-                  <div className="flex items-center gap-2">
-                    <UrgenciaBadge urgencia={resultado.analise.urgencia} />
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-400">
-                      {resultado.analise.origemAnalise === "openai" ? "analisado por IA (OpenAI)" : "motor local"}
-                    </span>
+              {modo === "ml" && resultado.classificacaoML && (
+                <>
+                  <ClassificacaoMLCard classificacao={resultado.classificacaoML} destaque />
+
+                  <div>
+                    <h2 className="mb-4 text-lg font-semibold text-white">
+                      Atendentes recomendados (baseado no modelo de ML)
+                    </h2>
+                    <div className="space-y-4">
+                      {(resultado.matchesML ?? []).map((match, i) => (
+                        <MatchCard key={match.atendente.id} match={match} posicao={i + 1} />
+                      ))}
+                    </div>
                   </div>
-                </div>
-
-                <p className="mt-4 text-sm leading-relaxed text-slate-300">{resultado.analise.resumoPerfil}</p>
-
-                <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-400">
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                    segmento: {resultado.analise.segmentoDetectado}
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                    sentimento: {resultado.analise.sentimentoGeral}
-                  </span>
-                  {resultado.analise.zonaNps && (
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                      NPS: {resultado.analise.zonaNps}
-                    </span>
-                  )}
-                </div>
-
-                <div className="mt-4">
-                  <MencoesTags
-                    mencoesTotvs={resultado.analise.mencoesTotvs}
-                    mencoesConcorrentes={resultado.analise.mencoesConcorrentes}
-                  />
-                </div>
-
-                <h3 className="mt-6 text-sm font-semibold text-white">Dores e necessidades identificadas</h3>
-                <ul className="mt-3 space-y-2">
-                  {resultado.analise.dores.map((dor, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
-                      <span className="mt-0.5 text-accent-400">●</span>
-                      {dor}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h2 className="mb-4 text-lg font-semibold text-white">Atendentes recomendados</h2>
-                <div className="space-y-4">
-                  {resultado.matches.map((match, i) => (
-                    <MatchCard key={match.atendente.id} match={match} posicao={i + 1} />
-                  ))}
-                </div>
-              </div>
+                </>
+              )}
             </>
           )}
         </div>

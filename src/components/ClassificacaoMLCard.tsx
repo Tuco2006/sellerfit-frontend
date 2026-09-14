@@ -13,22 +13,37 @@ const cores: Record<SinalNegocio, string> = {
   NEUTRO: "bg-slate-500",
 };
 
-export function ClassificacaoMLCard({ classificacao }: { classificacao: ClassificacaoML }) {
+const iconePorSinal: Record<SinalNegocio, string> = {
+  ALERTA_CHURN: "⚠️",
+  OPORTUNIDADE_UPSELL: "💰",
+  NEUTRO: "📊",
+};
+
+export function ClassificacaoMLCard({
+  classificacao,
+  destaque = false,
+}: {
+  classificacao: ClassificacaoML;
+  destaque?: boolean;
+}) {
   const ordem: SinalNegocio[] = ["ALERTA_CHURN", "OPORTUNIDADE_UPSELL", "NEUTRO"];
 
   return (
-    <div className="card rounded-2xl p-6">
+    <div className={`card rounded-2xl ${destaque ? "p-7" : "p-6"}`}>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h3 className="text-sm font-semibold text-white">
-          Classificacao por Machine Learning
-        </h3>
+        <div className="flex items-center gap-2">
+          {destaque && <span className="text-2xl">{iconePorSinal[classificacao.sinal]}</span>}
+          <h3 className={destaque ? "text-lg font-semibold text-white" : "text-sm font-semibold text-white"}>
+            {destaque ? `Previsao do modelo: ${labels[classificacao.sinal]}` : "Classificacao por Machine Learning"}
+          </h3>
+        </div>
         <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-slate-400">
           TF-IDF + Regressao Logistica
         </span>
       </div>
       <p className="mt-1 text-xs text-slate-500">
-        Modelo estatistico treinado nos dados reais do desafio de Data Science da equipe, rodando
-        em paralelo com a IA generativa.{" "}
+        Modelo estatistico treinado nos dados reais do desafio de Data Science da equipe — uma
+        segunda forma de analisar a reuniao, sem depender de IA generativa.{" "}
         <Link href="/insights" className="text-brand-400 hover:text-brand-300">
           Entenda como
         </Link>
@@ -57,7 +72,7 @@ export function ClassificacaoMLCard({ classificacao }: { classificacao: Classifi
 
       <p className="mt-4 text-xs italic text-slate-500">
         Esse modelo classico tem recall limitado (validado no notebook do desafio) e pode
-        divergir da regra de negocio acima — os dois rodam de propósito em paralelo pra comparar
+        divergir da analise por IA — os dois rodam de proposito em paralelo pra comparar
         abordagens diferentes.
       </p>
     </div>

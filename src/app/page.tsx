@@ -8,6 +8,12 @@ const features = [
     icone: "🧠",
   },
   {
+    titulo: "Duas formas de analisar",
+    descricao:
+      "Alem da IA generativa, o site tambem roda um modelo classico de Machine Learning (TF-IDF + Regressao Logistica) treinado nos dados reais do desafio de Data Science — as duas rodam em paralelo pra comparar abordagens diferentes.",
+    icone: "📊",
+  },
+  {
     titulo: "Perfil comportamental do cliente",
     descricao:
       "Alem das dores, o sistema gera um resumo do perfil do cliente, o sentimento geral da conversa e o nivel de urgencia do caso.",
