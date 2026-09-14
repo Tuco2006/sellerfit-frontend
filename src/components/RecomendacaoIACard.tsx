@@ -4,7 +4,7 @@ export function RecomendacaoIACard({ recomendacao }: { recomendacao: Recomendaca
   const { atendente, justificativa } = recomendacao;
 
   return (
-    <div className="card relative overflow-hidden rounded-2xl border-brand-500/30 p-6">
+    <div className="card relative rounded-2xl border-brand-500/30 p-6">
       <span className="absolute -top-3 right-5 rounded-full bg-gradient-to-r from-brand-500 to-accent-500 px-3 py-1 text-xs font-bold text-white shadow-glow">
         ESCOLHA DA IA
       </span>
