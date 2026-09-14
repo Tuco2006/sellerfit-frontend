@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const distribuicao = [
   { classe: "Neutro", quantidade: 136, cor: "bg-slate-500" },
   { classe: "Oportunidade Upsell", quantidade: 115, cor: "bg-accent-500" },
@@ -108,7 +110,50 @@ export default function InsightsPage() {
             A IA (OpenAI) complementa essa camada de regras identificando dores implicitas, o
             perfil comportamental do cliente e o traco ideal do atendente.
           </li>
+          <li className="flex gap-2">
+            <span className="text-accent-400">●</span>
+            O modelo de Regressao Logistica treinado neste notebook (TF-IDF + <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs">class_weight=&apos;balanced&apos;</code>)
+            foi exportado e roda de verdade, embarcado no backend do site, como um terceiro motor
+            de classificacao independente da IA generativa.
+          </li>
         </ul>
+      </section>
+
+      <section className="card mt-8 rounded-2xl p-6">
+        <h2 className="text-lg font-semibold text-white">Tres abordagens rodando em paralelo</h2>
+        <p className="mt-3 text-sm leading-relaxed text-slate-300">
+          Na tela de{" "}
+          <Link href="/analisar" className="text-brand-400 hover:text-brand-300">
+            analise de reuniao
+          </Link>
+          , toda transcricao passa pelas tres tecnicas ao mesmo tempo, pra dar pra comparar como
+          cada uma enxerga o mesmo texto:
+        </p>
+        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+          <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+            <p className="font-semibold text-white">1. Regra de negocio</p>
+            <p className="mt-1 text-xs text-slate-400">
+              Deterministica: NPS + mencao a concorrente + palavras-chave. Rapida e explicavel.
+            </p>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+            <p className="font-semibold text-white">2. Machine Learning classico</p>
+            <p className="mt-1 text-xs text-slate-400">
+              TF-IDF + Regressao Logistica treinada nos dados reais do desafio. Estatistica pura,
+              sem IA generativa.
+            </p>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+            <p className="font-semibold text-white">3. IA generativa</p>
+            <p className="mt-1 text-xs text-slate-400">
+              OpenAI le a transcricao e entende nuances, dores implicitas e o perfil do cliente.
+            </p>
+          </div>
+        </div>
+        <p className="mt-4 text-xs italic text-slate-500">
+          As tres nem sempre concordam entre si — e isso e proposital: mostra na pratica a
+          diferenca de recall/limitacoes entre um modelo estatistico classico e uma IA generativa.
+        </p>
       </section>
     </div>
   );

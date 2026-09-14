@@ -7,6 +7,7 @@ import { UrgenciaBadge } from "@/components/UrgenciaBadge";
 import { MatchCard } from "@/components/MatchCard";
 import { SinalNegocioBanner } from "@/components/SinalNegocioBanner";
 import { MencoesTags } from "@/components/MencoesTags";
+import { ClassificacaoMLCard } from "@/components/ClassificacaoMLCard";
 
 const segmentos = [
   "varejo",
@@ -184,6 +185,10 @@ export default function AnalisarPage() {
           {resultado && (
             <>
               <SinalNegocioBanner analise={resultado.analise} />
+
+              {resultado.classificacaoML && (
+                <ClassificacaoMLCard classificacao={resultado.classificacaoML} />
+              )}
 
               <div className="card rounded-2xl p-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
