@@ -6,7 +6,7 @@ export async function buscarAtendentes(): Promise<Atendente[]> {
   const resposta = await fetch(`${API_URL}/api/atendentes`, { cache: "no-store" });
 
   if (!resposta.ok) {
-    throw new Error("nao foi possivel carregar os atendentes");
+    throw new Error("não foi possível carregar os atendentes");
   }
 
   return resposta.json();
@@ -21,7 +21,7 @@ export async function analisarReuniao(entrada: EntradaAnalise): Promise<Resultad
 
   if (!resposta.ok) {
     const erro = await resposta.json().catch(() => null);
-    throw new Error(erro?.erro || "falha ao analisar a transcricao");
+    throw new Error(erro?.erro || "falha ao analisar a transcrição");
   }
 
   return resposta.json();

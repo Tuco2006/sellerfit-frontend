@@ -6,7 +6,7 @@ const config: Record<
 > = {
   ALERTA_CHURN: {
     titulo: "Risco de Churn",
-    acao: "Encaminhar para o time de Retencao",
+    acao: "Encaminhar para o time de Retenção",
     icone: "⚠️",
     classe: "border-rose-500/30 bg-rose-500/10 text-rose-300",
   },
@@ -17,7 +17,7 @@ const config: Record<
     classe: "border-emerald-500/30 bg-emerald-500/10 text-emerald-300",
   },
   NEUTRO: {
-    titulo: "Sem sinal critico de negocio",
+    titulo: "Sem sinal crítico de negócio",
     acao: "Seguir o atendimento normalmente",
     icone: "🟢",
     classe: "border-white/10 bg-white/5 text-slate-300",

@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   title: "SellerFit - Match inteligente entre cliente e atendente",
   description:
-    "Analise reunioes comerciais com IA, identifique dores do cliente e encontre o atendente TOTVS mais compativel.",
+    "Analise reuniões comerciais com IA, identifique dores do cliente e encontre o atendente TOTVS mais compatível.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

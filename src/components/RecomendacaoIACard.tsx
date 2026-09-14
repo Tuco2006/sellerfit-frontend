@@ -10,7 +10,7 @@ export function RecomendacaoIACard({ recomendacao }: { recomendacao: Recomendaca
       </span>
 
       <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-        Recomendacao direta da IA
+        Recomendação direta da IA
       </p>
 
       <div className="mt-3 flex items-center gap-3">
@@ -29,8 +29,8 @@ export function RecomendacaoIACard({ recomendacao }: { recomendacao: Recomendaca
       <p className="mt-4 text-sm leading-relaxed text-slate-200">{justificativa}</p>
 
       <p className="mt-4 text-xs italic text-slate-500">
-        Diferente do ranking por score abaixo, essa escolha vem do proprio modelo de linguagem
-        lendo a bio e o perfil de cada atendente do catalogo, nao de uma formula fixa.
+        Diferente do ranking por score abaixo, essa escolha vem do próprio modelo de linguagem
+        lendo a bio e o perfil de cada atendente do catálogo, não de uma fórmula fixa.
       </p>
     </div>
   );

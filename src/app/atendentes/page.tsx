@@ -10,7 +10,7 @@ export default async function AtendentesPage() {
   try {
     atendentes = await buscarAtendentes();
   } catch (e) {
-    erro = "Nao foi possivel carregar a base de atendentes agora. Verifique se o backend esta no ar.";
+    erro = "Não foi possível carregar a base de atendentes agora. Verifique se o backend está no ar.";
   }
 
   return (
@@ -19,7 +19,7 @@ export default async function AtendentesPage() {
         <h1 className="text-2xl font-bold text-white sm:text-3xl">Base de atendentes</h1>
         <p className="mt-2 max-w-2xl text-slate-400">
           Time simulado de consultores TOTVS usado pelo SellerFit pra calcular o match com cada
-          cliente. Cada atendente tem especialidade, tracos de personalidade e historico proprio.
+          cliente. Cada atendente tem especialidade, traços de personalidade e histórico próprio.
         </p>
       </div>
 

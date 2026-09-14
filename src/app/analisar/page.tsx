@@ -12,20 +12,20 @@ import { RecomendacaoIACard } from "@/components/RecomendacaoIACard";
 
 const segmentos = [
   "varejo",
-  "industria",
-  "saude",
-  "logistica",
+  "indústria",
+  "saúde",
+  "logística",
   "financeiro",
-  "agronegocio",
-  "educacao",
-  "servicos",
+  "agronegócio",
+  "educação",
+  "serviços",
   "contabilidade",
 ];
 
-const exemploTranscricao = `Vendedor: entao, me conta um pouco do que esta acontecendo ai no dia a dia.
-Cliente: olha, hoje o nosso sistema esta bem lento, principalmente no fechamento do caixa. Fora que a gente ainda faz o controle de estoque em planilha, o que da bastante retrabalho.
-Vendedor: entendi, e sobre o suporte de voces hoje, como funciona?
-Cliente: o suporte atual demora muito pra responder e as vezes a gente nem entende direito a explicacao. Ja estamos vendo propostas de outros fornecedores, tipo Linx, por causa disso.`;
+const exemploTranscricao = `Vendedor: então, me conta um pouco do que está acontecendo aí no dia a dia.
+Cliente: olha, hoje o nosso sistema está bem lento, principalmente no fechamento do caixa. Fora que a gente ainda faz o controle de estoque em planilha, o que dá bastante retrabalho.
+Vendedor: entendi, e sobre o suporte de vocês hoje, como funciona?
+Cliente: o suporte atual demora muito pra responder e às vezes a gente nem entende direito a explicação. Já estamos vendo propostas de outros fornecedores, tipo Linx, por causa disso.`;
 
 export default function AnalisarPage() {
   const [clienteNome, setClienteNome] = useState("");
@@ -54,7 +54,7 @@ export default function AnalisarPage() {
       });
       setResultado(dados);
     } catch (e) {
-      setErro(e instanceof Error ? e.message : "erro inesperado ao analisar a reuniao");
+      setErro(e instanceof Error ? e.message : "erro inesperado ao analisar a reunião");
     } finally {
       setCarregando(false);
     }
@@ -71,11 +71,11 @@ export default function AnalisarPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16">
       <div className="mb-10">
-        <h1 className="text-2xl font-bold text-white sm:text-3xl">Analisar reuniao</h1>
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">Analisar reunião</h1>
         <p className="mt-2 max-w-2xl text-slate-400">
-          Cole a transcricao da conversa entre o vendedor e o cliente. Depois de analisar, escolha
+          Cole a transcrição da conversa entre o vendedor e o cliente. Depois de analisar, escolha
           entre ver o resultado da <strong className="text-white">IA generativa</strong> (dores,
-          urgencia, perfil e match) ou do <strong className="text-white">modelo de Machine Learning</strong>{" "}
+          urgência, perfil e match) ou do <strong className="text-white">modelo de Machine Learning</strong>{" "}
           treinado nos dados do desafio de Data Science — duas formas diferentes de chegar no
           mesmo objetivo.
         </p>
@@ -138,7 +138,7 @@ export default function AnalisarPage() {
 
           <div>
             <div className="mb-1.5 flex items-center justify-between">
-              <label className="block text-sm font-medium text-slate-300">Transcricao da reuniao</label>
+              <label className="block text-sm font-medium text-slate-300">Transcrição da reunião</label>
               <button
                 type="button"
                 onClick={preencherExemplo}
@@ -174,7 +174,7 @@ export default function AnalisarPage() {
             <div className="card flex h-full min-h-[300px] flex-col items-center justify-center rounded-2xl p-10 text-center">
               <span className="text-4xl">🔍</span>
               <p className="mt-4 max-w-sm text-sm text-slate-400">
-                Preencha o formulario e clique em "Analisar com IA" pra ver o perfil do cliente e
+                Preencha o formulário e clique em "Analisar com IA" pra ver o perfil do cliente e
                 os atendentes recomendados aqui.
               </p>
             </div>
@@ -183,7 +183,7 @@ export default function AnalisarPage() {
           {carregando && (
             <div className="card flex h-full min-h-[300px] flex-col items-center justify-center rounded-2xl p-10 text-center">
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-500 border-t-transparent" />
-              <p className="mt-4 text-sm text-slate-400">A IA esta lendo a transcricao...</p>
+              <p className="mt-4 text-sm text-slate-400">A IA está lendo a transcrição...</p>
             </div>
           )}
 
@@ -191,7 +191,7 @@ export default function AnalisarPage() {
             <>
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-xs font-medium uppercase tracking-wide text-slate-500">
-                  Forma de analise:
+                  Forma de análise:
                 </span>
                 <div className="flex rounded-full border border-white/10 bg-white/5 p-1">
                   <button
@@ -271,7 +271,7 @@ export default function AnalisarPage() {
 
                   <div>
                     <h2 className="mb-4 text-lg font-semibold text-white">
-                      Ranking por score multi-criterio
+                      Ranking por score multi-critério
                     </h2>
                     <div className="space-y-4">
                       {resultado.matches.map((match, i) => (

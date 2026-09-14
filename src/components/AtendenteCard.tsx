@@ -1,13 +1,13 @@
 import { Atendente } from "@/lib/types";
 
 const disponibilidadeCor: Record<Atendente["disponibilidade"], string> = {
-  Disponivel: "bg-emerald-400",
+  Disponível: "bg-emerald-400",
   "Em atendimento": "bg-amber-400",
   Ausente: "bg-slate-500",
 };
 
 const focoLabel: Record<Atendente["foco"][number], string> = {
-  retencao: "🛡️ Retencao",
+  retenção: "🛡️ Retenção",
   "cross-sell": "💰 Cross-sell",
 };
 
@@ -71,7 +71,7 @@ export function AtendenteCard({ atendente }: { atendente: Atendente }) {
       <div className="mt-auto grid grid-cols-3 gap-2 border-t border-white/5 pt-4 text-center">
         <div>
           <p className="text-lg font-bold text-white">{atendente.notaMedia.toFixed(1)}</p>
-          <p className="text-xs text-slate-500">nota media</p>
+          <p className="text-xs text-slate-500">nota média</p>
         </div>
         <div>
           <p className="text-lg font-bold text-white">{atendente.casesResolvidos}</p>
