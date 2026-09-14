@@ -13,6 +13,12 @@ const cores: Record<SinalNegocio, string> = {
   NEUTRO: "bg-slate-500",
 };
 
+const corTermo: Record<SinalNegocio, string> = {
+  ALERTA_CHURN: "border-rose-500/30 bg-rose-500/10 text-rose-300",
+  OPORTUNIDADE_UPSELL: "border-accent-500/30 bg-accent-500/10 text-accent-300",
+  NEUTRO: "border-white/10 bg-white/5 text-slate-300",
+};
+
 const iconePorSinal: Record<SinalNegocio, string> = {
   ALERTA_CHURN: "⚠️",
   OPORTUNIDADE_UPSELL: "💰",
@@ -70,12 +76,44 @@ export function ClassificacaoMLCard({
         ))}
       </div>
 
-      {classificacao.explicacao && (
-        <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4">
+      {classificacao.termosChave.length > 0 && (
+        <div className="mt-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-            Por que e como aproveitar
+            Palavras-chave que pesaram nessa decisao
           </p>
-          <p className="mt-1.5 text-sm leading-relaxed text-slate-200">{classificacao.explicacao}</p>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {classificacao.termosChave.map((termo) => (
+              <span
+                key={termo}
+                className={`rounded-full border px-2.5 py-1 text-xs font-medium ${corTermo[classificacao.sinal]}`}
+              >
+                {termo}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {classificacao.motivo && (
+        <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Por que esse sinal</p>
+          <p className="mt-1.5 text-sm leading-relaxed text-slate-200">{classificacao.motivo}</p>
+        </div>
+      )}
+
+      {classificacao.janelasDeOportunidade.length > 0 && (
+        <div className="mt-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+            Janelas de oportunidade e como aproveitar
+          </p>
+          <ul className="mt-2 space-y-2">
+            {classificacao.janelasDeOportunidade.map((item, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
+                <span className="mt-0.5 text-accent-400">{i + 1}.</span>
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 

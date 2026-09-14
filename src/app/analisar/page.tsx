@@ -8,6 +8,7 @@ import { MatchCard } from "@/components/MatchCard";
 import { SinalNegocioBanner } from "@/components/SinalNegocioBanner";
 import { MencoesTags } from "@/components/MencoesTags";
 import { ClassificacaoMLCard } from "@/components/ClassificacaoMLCard";
+import { RecomendacaoIACard } from "@/components/RecomendacaoIACard";
 
 const segmentos = [
   "varejo",
@@ -264,8 +265,14 @@ export default function AnalisarPage() {
                     </ul>
                   </div>
 
+                  {resultado.recomendacaoIA && (
+                    <RecomendacaoIACard recomendacao={resultado.recomendacaoIA} />
+                  )}
+
                   <div>
-                    <h2 className="mb-4 text-lg font-semibold text-white">Atendentes recomendados</h2>
+                    <h2 className="mb-4 text-lg font-semibold text-white">
+                      Ranking por score multi-criterio
+                    </h2>
                     <div className="space-y-4">
                       {resultado.matches.map((match, i) => (
                         <MatchCard key={match.atendente.id} match={match} posicao={i + 1} />

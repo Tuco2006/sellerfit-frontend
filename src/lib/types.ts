@@ -44,7 +44,14 @@ export interface ClassificacaoML {
   sinal: SinalNegocio;
   confianca: number;
   probabilidades: Record<SinalNegocio, number>;
-  explicacao?: string;
+  termosChave: string[];
+  motivo: string;
+  janelasDeOportunidade: string[];
+}
+
+export interface RecomendacaoIA {
+  atendente: Atendente;
+  justificativa: string;
 }
 
 export interface ResultadoAnalise {
@@ -52,6 +59,7 @@ export interface ResultadoAnalise {
   matches: MatchAtendente[];
   classificacaoML?: ClassificacaoML;
   matchesML?: MatchAtendente[];
+  recomendacaoIA?: RecomendacaoIA;
 }
 
 export interface EntradaAnalise {
