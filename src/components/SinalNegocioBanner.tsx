@@ -25,7 +25,7 @@ const config: Record<
 };
 
 export function SinalNegocioBanner({ analise }: { analise: AnaliseTranscricao }) {
-  const c = config[analise.sinalNegocio];
+  const c = config[analise.sinalNegocio] ?? config.NEUTRO;
 
   return (
     <div className={`rounded-2xl border p-5 ${c.classe}`}>
@@ -34,7 +34,9 @@ export function SinalNegocioBanner({ analise }: { analise: AnaliseTranscricao })
         <div>
           <p className="font-semibold">{c.titulo}</p>
           <p className="text-sm opacity-90">{c.acao}</p>
-          <p className="mt-2 text-xs opacity-75">{analise.justificativaSinal}</p>
+          {analise.justificativaSinal && (
+            <p className="mt-2 text-xs opacity-75">{analise.justificativaSinal}</p>
+          )}
         </div>
       </div>
     </div>

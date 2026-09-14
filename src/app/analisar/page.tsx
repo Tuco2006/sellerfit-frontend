@@ -205,9 +205,11 @@ export default function AnalisarPage() {
                   <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
                     sentimento: {resultado.analise.sentimentoGeral}
                   </span>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                    NPS: {resultado.analise.zonaNps}
-                  </span>
+                  {resultado.analise.zonaNps && (
+                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                      NPS: {resultado.analise.zonaNps}
+                    </span>
+                  )}
                 </div>
 
                 <div className="mt-4">
