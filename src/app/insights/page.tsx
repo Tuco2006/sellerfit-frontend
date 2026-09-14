@@ -13,12 +13,12 @@ const metricas = [
 
 export default function InsightsPage() {
   return (
-    <div className="mx-auto max-w-4xl px-6 py-16">
+    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-16">
       <div className="mb-12">
         <span className="mb-3 inline-block rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-wide text-slate-400">
           Metodologia
         </span>
-        <h1 className="text-3xl font-bold text-white">De onde vem a inteligencia do SellerFit</h1>
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">De onde vem a inteligencia do SellerFit</h1>
         <p className="mt-3 text-slate-400">
           A logica de identificacao de churn e upsell usada aqui no site nao foi inventada do zero:
           ela reproduz a regra de negocio validada no desafio de Data Science &amp; Statistical

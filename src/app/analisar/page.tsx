@@ -66,9 +66,9 @@ export default function AnalisarPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16">
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16">
       <div className="mb-10">
-        <h1 className="text-3xl font-bold text-white">Analisar reuniao</h1>
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">Analisar reuniao</h1>
         <p className="mt-2 max-w-2xl text-slate-400">
           Cole a transcricao da conversa entre o vendedor e o cliente. A IA vai identificar dores,
           calcular a urgencia, apontar sinais de churn/upsell e sugerir o atendente mais compativel.
@@ -88,7 +88,7 @@ export default function AnalisarPage() {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label className="mb-1.5 block text-sm font-medium text-slate-300">Empresa</label>
               <input

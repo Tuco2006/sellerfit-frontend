@@ -14,9 +14,9 @@ export default async function AtendentesPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16">
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16">
       <div className="mb-10">
-        <h1 className="text-3xl font-bold text-white">Base de atendentes</h1>
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">Base de atendentes</h1>
         <p className="mt-2 max-w-2xl text-slate-400">
           Time simulado de consultores TOTVS usado pelo SellerFit pra calcular o match com cada
           cliente. Cada atendente tem especialidade, tracos de personalidade e historico proprio.

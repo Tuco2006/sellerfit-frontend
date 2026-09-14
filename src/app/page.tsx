@@ -56,15 +56,15 @@ export default function HomePage() {
     <div>
       <section className="bg-grid relative overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-gradient-to-b from-brand-500/10 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-5xl px-6 py-28 text-center">
+        <div className="relative mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-28">
           <span className="mb-6 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-slate-300">
             Solucao para o desafio TOTVS
           </span>
-          <h1 className="text-4xl font-bold leading-tight text-white sm:text-6xl">
+          <h1 className="text-3xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">
             Nenhuma dor do cliente
             <span className="bg-gradient-to-r from-brand-400 to-accent-400 bg-clip-text text-transparent"> passa despercebida</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
+          <p className="mx-auto mt-6 max-w-2xl text-base text-slate-400 sm:text-lg">
             O SellerFit analisa a transcricao da reuniao comercial com IA, identifica dores e
             necessidades do cliente e faz o match com o atendente TOTVS mais compativel pra
             continuar o atendimento.
@@ -86,8 +86,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-24">
-        <div className="mb-14 text-center">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <div className="mb-10 text-center sm:mb-14">
           <h2 className="text-3xl font-bold text-white">Como funciona</h2>
           <p className="mt-2 text-slate-400">Do texto da reuniao ao atendente ideal em 3 passos.</p>
         </div>
@@ -102,9 +102,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-white/5 bg-base-900/40 py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-14 text-center">
+      <section className="border-t border-white/5 bg-base-900/40 py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="mb-10 text-center sm:mb-14">
             <h2 className="text-3xl font-bold text-white">O que o SellerFit entrega</h2>
             <p className="mt-2 text-slate-400">Inteligencia artificial aplicada ao pos-reuniao comercial.</p>
           </div>
@@ -120,7 +120,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-4xl px-6 py-24 text-center">
+      <section className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 sm:py-24">
         <h2 className="text-3xl font-bold text-white">Pronto pra testar?</h2>
         <p className="mt-3 text-slate-400">
           Cole uma transcricao de reuniao e veja a analise da IA e o match com nossa base de atendentes.
