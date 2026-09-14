@@ -36,7 +36,7 @@ export function AtendenteCard({ atendente }: { atendente: Atendente }) {
       <p className="text-sm leading-relaxed text-slate-300">{atendente.bio}</p>
 
       <div className="flex flex-wrap gap-1.5">
-        {atendente.foco.map((f) => (
+        {(atendente.foco ?? []).map((f) => (
           <span
             key={f}
             className="rounded-full border border-accent-500/30 bg-accent-500/10 px-2.5 py-1 text-xs font-medium text-accent-400"
