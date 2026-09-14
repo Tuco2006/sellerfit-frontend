@@ -44,6 +44,7 @@ export interface ClassificacaoML {
   sinal: SinalNegocio;
   confianca: number;
   probabilidades: Record<SinalNegocio, number>;
+  explicacao?: string;
 }
 
 export interface ResultadoAnalise {

@@ -70,6 +70,15 @@ export function ClassificacaoMLCard({
         ))}
       </div>
 
+      {classificacao.explicacao && (
+        <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+            Por que e como aproveitar
+          </p>
+          <p className="mt-1.5 text-sm leading-relaxed text-slate-200">{classificacao.explicacao}</p>
+        </div>
+      )}
+
       <p className="mt-4 text-xs italic text-slate-500">
         Esse modelo classico tem recall limitado (validado no notebook do desafio) e pode
         divergir da analise por IA — os dois rodam de proposito em paralelo pra comparar
